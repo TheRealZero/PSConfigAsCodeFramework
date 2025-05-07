@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<plasterManifest schemaVersion="1.2" templateType="Project"
+  xmlns="http://www.microsoft.com/schemas/PowerShell/Plaster/v1">
+  <metadata>
+    <name>TCFTemplate-GitPull</name>
+    <id>68b604df-350e-483e-87e3-9b7ad295b673</id>
+    <version>1.0.0</version>
+    <title>TCFTemplate-GitPullScript</title>
+    <description></description>
+    <author></author>
+    <tags></tags>
+  </metadata>
+  <parameters>
+    <parameter name='RepoName'            type='text'   prompt='Enter the name of the repository'/>
+  </parameters>
+  <content>
+    <templateFile source='TaskConfigFile.T.ps1' destination='GitPull-TaskConfig-$PLASTER_PARAM_RepoName.psd1'/>
+
+  </content>
+</plasterManifest>

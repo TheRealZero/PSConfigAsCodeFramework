@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<plasterManifest schemaVersion="1.2" templateType="Project"
+  xmlns="http://www.microsoft.com/schemas/PowerShell/Plaster/v1">
+  <metadata>
+    <name>TCFTemplate-WorkloadScript</name>
+    <id>13073fd6-af4b-4029-a8e3-ea4f29809d0d</id>
+    <version>1.0.0</version>
+    <title>TCFTemplate</title>
+    <description></description>
+    <author></author>
+    <tags></tags>
+  </metadata>
+  <parameters>
+    <parameter name='RepoName'          type='text'     prompt='Enter the name of the repository'/>
+    <parameter name='ScriptName'        type='text'     prompt='Enter the Script File Name'/>
+    <parameter name='TaskDescription'   type='text'     prompt='Describe the task'/>
+    <parameter name='TaskPath'          type='choice'   prompt='Select Task Path' default='0'>
+      <choice   label='\3M&amp;Automation\' 
+                value='\3MAutomation\'
+                help='The standard path for automations on the server'/>
+      <choice   label='&amp;Other'
+                value='EDIT THIS PROPERTY'
+                help='A different path that you will manually add to the TCF'/>
+    </parameter>
+    <parameter name='Execute' type='choice' prompt='PowerShell Executable' default='0'>
+      <choice label='po&amp;wershell.exe (Windows PowerShell)/' value='powershell.exe'/>
+      <choice label='&amp;pwsh.exe (PowerShell Core)' value='pwsh.exe'/>
+    </parameter>
+    <parameter name='Arguments' type='text'  default=' ' prompt='Enter any additional script arguments'/>
+    <parameter name='UserId' type='text' prompt='User ID to run the task as'/>
+    <parameter name='PrincipalSecretName' type='text' prompt='Name of the secret in KeyVault for the user ID'/>
+    <parameter name='RunLevel' type='choice' prompt='What is the run level of the task?' default = '0' store='text'>
+      <choice label='&amp;Limited' value='Limited'/>
+      <choice label='&amp;Highest' value='Highest'/>
+    </parameter>
+  </parameters>
+  <content>
+    <templateFile source='TaskConfigFile.T.ps1' destination='$(($PLASTER_PARAM_ScriptName).Replace(".ps1","$null"))-TaskConfig.psd1'/>
+
+  </content>
+</plasterManifest>
