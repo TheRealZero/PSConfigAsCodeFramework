@@ -22,9 +22,9 @@
     Description = '<%=$PLASTER_PARAM_TaskDescription%>'
     TaskAction  = @{
         Execute                         = '<%=$PLASTER_PARAM_Execute%>' 
-        Argument                        = "-WindowStyle Hidden -File 'D:\GitHub\<%=$PLASTER_PARAM_RepoName%>\<%=$PLASTER_PARAM_ScriptName%>' <%=$PLASTER_PARAM_Arugments%>"
-        Id                              = '<%=([System.Guid]::NewGuid())%>'
-        WorkingDirectory                = 'D:\'
+        Argument                        = "-WindowStyle Hidden -File '<%=$("$PLASTER_PARAM_PSCRepoPath\$PLASTER_PARAM_ScriptName")%>' <%=$PLASTER_PARAM_Arguments%>"
+        
+        #WorkingDirectory                = 'D:\'
     }
 
     TaskTrigger = @{
@@ -41,10 +41,10 @@
 
     TaskPrincipal = @{
         UserId                          = '<%=$PLASTER_PARAM_UserId%>'
-        LogonType                       = 'Password' # Password is equivilent to checking the box "Run whether user is logged on or not"
-        RunLevel                        = '<%=$PLASTER_PARAM_RunLevel%>' # Limited is equivilent to not checking the box "Run with highest privileges".  This is the desired setting for cloning repos.  Cloning as admin can cause permission issues.
+        LogonType                       = 'Password' # Password is equivalent to checking the box "Run whether user is logged on or not"
+        RunLevel                        = '<%=$PLASTER_PARAM_RunLevel%>' # Limited is equivalent to not checking the box "Run with highest privileges".  This is the desired setting for cloning repos.  Cloning as admin can cause permission issues.
     }
-    PrincipalSecretName                 = '<%=$PLASTER_PARAM_PrincipalSecretName%>'
+    PrincipalSecretName                 = '<%=$PLASTER_PARAM_UserId%>'
 
     TaskSettingSet = @{
         AllowStartIfOnBatteries             = $false            #<bool>

@@ -18,12 +18,12 @@
 #>
 @{
 
-    TaskName    = 'Github - Pull - <%=$($PLASTER_PARAM_OwnerName)%> - <%=$($PLASTER_PARAM_RepoName)%>'
+    TaskName    = 'Github - Pull - ExampleAccount - ExampleRepo'
     TaskPath    = '\Github Core\'
-    Description = 'Clones the <%=$($PLASTER_PARAM_OwnerName)%>\<%=$($PLASTER_PARAM_RepoName)%> Repo'
+    Description = 'Clones the ExampleAccount\ExampleRepo Repo'
     TaskAction  = @{
-        Execute                         = '<%=$($PLASTER_PARAM_OwnerName)%>' 
-        Argument                        = "-WindowStyle Hidden -File '<%=$("$PLASTER_PARAM_PSCRepoPath\ServerScripts\Git-$($PLASTER_PARAM_RepoName)-Repo.ps1")%>'"
+        Execute                         = 'ExampleAccount' 
+        Argument                        = "-WindowStyle Hidden -File 'C:\Git\PSConfigAsCodeFramework\\ServerScripts\Git-ExampleRepo-Repo.ps1'"
         
         #WorkingDirectory                = 'D:\'
     }
@@ -41,11 +41,11 @@
     }
 
     TaskPrincipal = @{
-        UserId                          = '<%=$(@($PLASTER_PARAM_UserId,$PLASTER_PARAM_CustomUserId)[$null -eq $PLASTER_PARAM_UserId])%>'
+        UserId                          = 'PSCAutomation'
         LogonType                       = 'Password' # Password is equivalent to checking the box "Run whether user is logged on or not"
-        RunLevel                        = '<%=$PLASTER_PARAM_RunLevel%>' # Limited is equivalent to not checking the box "Run with highest privileges".  This is the desired setting for cloning repos.  Cloning as admin can cause permission issues.
+        RunLevel                        = 'Limited' # Limited is equivalent to not checking the box "Run with highest privileges".  This is the desired setting for cloning repos.  Cloning as admin can cause permission issues.
     }
-    PrincipalSecretName                 = '<%=$(@($PLASTER_PARAM_UserId,$PLASTER_PARAM_CustomUserId)[$null -eq $PLASTER_PARAM_UserId])%>'
+    PrincipalSecretName                 = 'PSCAutomation'
 
     TaskSettingSet = @{
         AllowStartIfOnBatteries             = $false            #<bool>
@@ -81,3 +81,4 @@
 
 
 }
+

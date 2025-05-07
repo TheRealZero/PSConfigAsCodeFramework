@@ -11,10 +11,46 @@
     <tags></tags>
   </metadata>
   <parameters>
-    <parameter name='RepoName'            type='text'   prompt='Enter the name of the repository'/>
-  </parameters>
+    <parameter  name='RepoName'      type='text'   prompt='Enter the name of the repository'/>
+    <parameter  name='OwnerName'     type='text'   prompt='Enter the name of the owner account'/>
+    <parameter  name='TaskPath'      type='choice' prompt='Select Scheduled Task Path' default='0'>
+        <choice     label='\&amp;PSCAutomation\' 
+                    value='\PSCAutomation\'
+                    help='The standard path for scheduled tasks on the server'/>
+        <choice     label='&amp;Other (Enter custom path)'
+                    value='CUSTOM'
+                    help='Select this option for a custom path'/>
+    </parameter>
+    <parameter  name='CustomTaskPath' type='text' prompt='Enter the custom path to the PSC Automation Folder' condition='$PLASTER_PARAM_TaskPath -eq "CUSTOM"'/>
+    <parameter  name='PSCRepoPath'   type='choice' prompt='Path to PSC ServerScripts Folder' default='0'>
+        <choice     label='&amp;PSCRepoPath Environment Variable'
+                    value="$env:PSCRepoPath"
+                    help='The value of the PSCRepoPath Environment Variable'/>
+        <choice     label='&amp;Other (Enter custom path)'
+                    value='CUSTOM'
+                    help='Select this option to enter a custom path'/>
+    </parameter>
+    <parameter name='CustomPSCRepoPath' type='text' prompt='Enter the custom path to the PSC ServerScripts Folder' condition='$PLASTER_PARAM_PSCRepoPath -eq "CUSTOM"'/>
+    <parameter name='PowerShellVersion' type='choice' prompt='PowerShell Executable' default='0'>
+        <choice label='po&amp;wershell.exe (Windows PowerShell)/' value='powershell.exe'/>
+        <choice label='&amp;pwsh.exe (PowerShell Core)' value='pwsh.exe'/>
+    </parameter>
+    <parameter name='UserId' type='choice' prompt='Account used to run scheduled task' default='0'>
+        <choice     label='&amp;PSCDefaultAccount Environment Variable'
+                    value="$env:PSCDefaultAccount"
+                    help='The value of the PSCDefaultAccount Environment Variable'/>
+        <choice     label='&amp;Other (Enter custom path)'
+                    value='CUSTOM'
+                    help='Select this option for a custom path'/>
+    </parameter>
+    <parameter  name='CustomUserId' type='text' prompt='Enter the custom account name' condition='$PLASTER_PARAM_UserId -eq "CUSTOM"'/>
+    <parameter name='RunLevel' type='choice' prompt='What is the run level of the task?' default = '0' store='text'>
+      <choice label='&amp;Limited' value='Limited'/>
+      <choice label='&amp;Highest' value='Highest'/>
+    </parameter>
+</parameters>
   <content>
-    <templateFile source='TaskConfigFile.T.ps1' destination='GitPull-TaskConfig-$PLASTER_PARAM_RepoName.psd1'/>
+    <templateFile source='TaskConfigFile.T.ps1' destination='GitPull-TaskConfig-$PLASTER_PARAM_OwnerName-$PLASTER_PARAM_RepoName.psd1'/>
 
   </content>
 </plasterManifest>
