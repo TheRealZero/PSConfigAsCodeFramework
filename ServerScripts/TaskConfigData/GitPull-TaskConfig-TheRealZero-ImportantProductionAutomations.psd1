@@ -41,7 +41,7 @@
     }
 
     TaskPrincipal = @{
-        UserId                          = 'PSCAutomation'
+        UserId                          = 'AutomationServe\PSCAutomation'
         LogonType                       = 'Password' # Password is equivalent to checking the box "Run whether user is logged on or not"
         RunLevel                        = 'Highest' # Limited is equivalent to not checking the box "Run with highest privileges".  This is the desired setting for cloning repos.  Cloning as admin can cause permission issues.
     }
