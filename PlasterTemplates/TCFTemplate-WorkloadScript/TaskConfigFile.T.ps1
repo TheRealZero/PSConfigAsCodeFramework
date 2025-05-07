@@ -22,7 +22,7 @@
     Description = '<%=$PLASTER_PARAM_TaskDescription%>'
     TaskAction  = @{
         Execute                         = '<%=$PLASTER_PARAM_Execute%>' 
-        Argument                        = "-WindowStyle Hidden -File '<%=$("$PLASTER_PARAM_PSCRepoPath\$PLASTER_PARAM_ScriptName")%>' <%=$PLASTER_PARAM_Arguments%>"
+        Argument                        = "-WindowStyle Hidden -File '<%=$("$(@("$PLASTER_PARAM_PSCWorkloadRepoPath","$PLASTER_PARAM_CustomPSCWorkloadRepoPath")[$null -eq $PLASTER_PARAM_PSCWorkloadRepoPath])\$PLASTER_PARAM_RepoName\$PLASTER_PARAM_ScriptName")%>' <%=$PLASTER_PARAM_Arguments%>"
         
         #WorkingDirectory                = 'D:\'
     }

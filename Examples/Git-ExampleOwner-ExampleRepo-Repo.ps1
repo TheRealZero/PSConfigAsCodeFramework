@@ -1,18 +1,23 @@
 param(
     [ValidateScript({$_ -Match '^[a-zA-Z0-9_-]+$'})]
-    [string]$GitRepoName = "GitRepo",
-    [string]$LogDirectory = "$env:LogOutputPath\GitPull"
+    [string]$GitRepoName = "ExampleRepo",
+    [ValidateScript({$_ -Match '^[a-zA-Z0-9_-]+$'})]
+    [string]$GitRepoOwner = $env:PSCDefaultOwner,
+    [ValidateScript({$_ -Match '^[a-zA-Z0-9_-]+$'})]
+    [string]$GitRepoDirPath = "$env:PSCWorkloadRepoPath",
+    [string]$LogDirectory = "$(Resolve-Path -Path "$env:PSCLogOutputPath\GitPull")"
 )
 
 $scriptName = $myInvocation.MyCommand.Name
 $logName    = $scriptName -replace '\.ps1', '.log'
-$GitRepoDirectory = Join-Path $env:GitRepos $GitRepoName
+$GitRepoDirectory = Join-Path $GitRepoDirPath $GitRepoName
 
 Start-Transcript -Path $(Join-Path $LogDirectory $logName) -Append
 
 if(Test-Path -Path $GitRepoDirectory){
     Set-Location $GitRepoDirectory
     Write-Host "Path exists, fetching..."
+    
     $expressions = @(
         "git fetch --all",
         "git reset --hard origin/main",
@@ -32,17 +37,17 @@ if(Test-Path -Path $GitRepoDirectory){
 }
 
 else{
-    Set-Location $env:GitRepos
+    Set-Location $env:PSCWorkloadRepoPath
 
     Write-Host "Path doesn't exist, cloning..."
-    $expression = "git clone git@github.com:TheRealZero/$GitRepoName.git"
+    $expression = "git clone git@github.com:$GitRepoOwner/$GitRepoName.git"
     Try{
         Invoke-Expression -Command $expression
         Write-Host "...done."
 
     }
     Catch{
-        Write-Warning "Error while cloneing repository: $_"
+        Write-Warning "Error while cloning repository: $_"
         Exit 400
     }
 }

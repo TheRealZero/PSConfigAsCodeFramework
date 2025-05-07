@@ -1,14 +1,18 @@
 param(
     [ValidateScript({$_ -Match '^[a-zA-Z0-9_-]+$'})]
-    [string]$GitRepoName = "ExampleRepo",
+    [string]$GitRepoName = '<%=$($PLASTER_PARAM_RepoName)%>',
     [ValidateScript({$_ -Match '^[a-zA-Z0-9_-]+$'})]
-    [string]$GitRepoOwner = $env:PSCDefaultOwner,
-    [string]$LogDirectory = "$env:PSCLogOutputPath\GitPull"
+    [string]$GitRepoOwner = '<%=$($PLASTER_PARAM_OwnerName)%>',
+    [ValidateScript({$_ -Match '^[a-zA-Z0-9_-]+$'})]
+    [Parameter(HelpMessage = 'The name of the containing directory where the repo will be/is cloned')]
+    [string]$GitRepoDirPath = '<%=$($PLASTER_PARAM_WorkloadDirPath)%>',
+    [Parameter(HelpMessage = 'The output directory path for the log file')]
+    [string]$LogDirectory = "$(Resolve-Path -Path "$env:PSCLogOutputPath\GitPull")"
 )
 
 $scriptName = $myInvocation.MyCommand.Name
 $logName    = $scriptName -replace '\.ps1', '.log'
-$GitRepoDirectory = Join-Path $env:PSCWorkloadRepoPath $GitRepoName
+$GitRepoDirectory = Join-Path $GitRepoDirPath $GitRepoName
 
 Start-Transcript -Path $(Join-Path $LogDirectory $logName) -Append
 
@@ -45,7 +49,7 @@ else{
 
     }
     Catch{
-        Write-Warning "Error while cloneing repository: $_"
+        Write-Warning "Error while cloning repository: $_"
         Exit 400
     }
 }

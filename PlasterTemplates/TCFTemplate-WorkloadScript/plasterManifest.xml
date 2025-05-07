@@ -12,7 +12,20 @@
   </metadata>
   <parameters>
     <parameter name='RepoName'          type='text'     prompt='Enter the name of the repository'/>
-    <parameter name='OwnerName'     type='text'   prompt='Enter the name of the owner account'/>
+    <parameter name='OwnerName'         type='text'   prompt='Enter the name of the owner account'/>
+    <parameter name='ScriptName'        type='text'     prompt='Enter the Script File Name'/>
+    <parameter name='TaskDescription'   type='text'     prompt='Describe the task'/>
+    
+    <parameter name='PSCWorkloadRepoPath' type='choice' prompt='Path to the PSC Workload Repos Folder' default='0'>
+        <choice     label='&amp;PSCWorkloadRepoPath Environment Variable'
+                    value="$env:PSCWorkloadRepoPath"
+                    help='The value of the WorkloadDirPath Environment Variable'/>
+        <choice     label='&amp;Other (Enter custom path)'
+                    value='CUSTOM'
+                    help='Select this option to enter a custom path'/>
+    </parameter>
+    <parameter name='CustomPSCWorkloadRepoPath' type='text' prompt='Enter the custom path to the directory that contains the workload Repo directory' condition='$PLASTER_PARAM_WorkloadDirPath -eq "CUSTOM"'/>
+    
     <parameter  name='TaskPath'      type='choice' prompt='Select Scheduled Task Path' default='0'>
         <choice     label='\&amp;PSCAutomation\' 
                     value='\PSCAutomation\'
@@ -21,8 +34,6 @@
                     value='CUSTOM'
                     help='Select this option for a custom path'/>
     </parameter>
-    <parameter name='ScriptName'        type='text'     prompt='Enter the Script File Name'/>
-    <parameter name='TaskDescription'   type='text'     prompt='Describe the task'/>
     <parameter name='Execute'           type='choice' prompt='PowerShell Executable' default='0'>
       <choice label='po&amp;wershell.exe (Windows PowerShell)/' value='powershell.exe'/>
       <choice label='&amp;pwsh.exe (PowerShell Core)'           value='pwsh.exe'/>
