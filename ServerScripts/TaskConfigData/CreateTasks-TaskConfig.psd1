@@ -77,7 +77,7 @@
     }
 
     TaskName    = "Automation - Create New Scheduled Tasks from Task Config Files"
-    TaskPath    = "\Automation\"
+    TaskPath    = "\PSCAutomation\"
     Description = "Creates new scheduled tasks from task configuration files"
 }
 

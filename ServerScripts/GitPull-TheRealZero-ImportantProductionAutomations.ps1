@@ -5,7 +5,7 @@ param(
     [string]$GitRepoOwner = 'TheRealZero',
     [ValidateScript({$_ -Match '^[a-zA-Z0-9_-]+$'})]
     [Parameter(HelpMessage = 'The name of the containing directory where the repo will be/is cloned')]
-    [string]$GitRepoDirPath = '',
+    [string]$GitRepoDirPath = "$env:PSCWorkloadRepoPath",
     [Parameter(HelpMessage = 'The output directory path for the log file')]
     [string]$LogDirectory = "$(Resolve-Path -Path "$env:PSCLogOutputPath\GitPull")"
 )
