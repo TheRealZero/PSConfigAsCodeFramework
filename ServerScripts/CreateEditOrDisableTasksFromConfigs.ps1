@@ -1,11 +1,12 @@
 param(
     [Parameter(Mandatory = $false, Position = 0, HelpMessage = "The path to the directory containing subdirectories to search for config files.")]
-    [string]$ConfigDirectoryPath = "$env:GitRepos"
+    [string]$ConfigDirectoryPath = "$env:PSCWorkloadRepoPath",
+    [string[]]$TaskPath = @("\PSCAutomation\","\Github Core\")
 )
 
-Start-Transcript -Path $(Join-Path -Path $env:LogOutputPath -ChildPath "CreateEditOrDisableTasksFromConfigs.log") -Append
+Start-Transcript -Path $(Join-Path -Path $env:PSCLogOutputPath -ChildPath "CreateEditOrDisableTasksFromConfigs.log") -Append
 Try {
-    Import-Module PSCServerModule -ErrorAction Stop
+    Import-Module "$PSScriptROOT\..\PSCServerModule" -ErrorAction Stop
 }
 Catch {
     Write-Error $_.Exception.Message
@@ -16,7 +17,7 @@ Catch {
 $ConfigDirectoryPath = Resolve-Path $ConfigDirectoryPath
 $TaskConfigDirs      = Get-ChildItem -Path $ConfigDirectoryPath -Recurse -Directory -Include "TaskConfigData"
 $ConfigFiles         = $TaskConfigDirs.Fullname | Foreach-Object { Get-Childitem -Recurse -Path $_ -Include *.psd1 }
-$currentTasks        = Get-ScheduledTask -TaskPath ("\Automation\","\Github Core\") -ErrorAction SilentlyContinue
+$currentTasks        = Get-ScheduledTask -TaskPath $TaskPath -ErrorAction SilentlyContinue
 $configDataObjs      = Foreach ($configFile in $ConfigFiles) { 
     Try {
         
