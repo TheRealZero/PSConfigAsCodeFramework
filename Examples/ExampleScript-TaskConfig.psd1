@@ -22,7 +22,7 @@
     Description = 'Example Task Description'
     TaskAction  = @{
         Execute                         = 'powershell.exe' 
-        Argument                        = "-WindowStyle Hidden -File 'C:\Git\PSConfigAsCodeFramework\\ExampleScript.ps1'  "
+        Argument                        = '-WindowStyle Hidden -File "C:\Git\PSConfigAsCodeFramework\\ExampleScript.ps1"'
         
         #WorkingDirectory                = 'D:\'
     }

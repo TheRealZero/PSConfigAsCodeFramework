@@ -23,7 +23,7 @@
     Description = 'Clones the ExampleAccount\ExampleRepo Repo'
     TaskAction  = @{
         Execute                         = 'ExampleAccount' 
-        Argument                        = "-WindowStyle Hidden -File 'C:\Git\PSConfigAsCodeFramework\\ServerScripts\Git-ExampleRepo-Repo.ps1'"
+        Argument                        = '-WindowStyle Hidden -File "C:\Git\PSConfigAsCodeFramework\\ServerScripts\Git-ExampleRepo-Repo.ps1"'
         
         #WorkingDirectory                = 'D:\'
     }

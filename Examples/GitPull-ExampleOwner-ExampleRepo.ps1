@@ -37,10 +37,10 @@ if(Test-Path -Path $GitRepoDirectory){
 }
 
 else{
-    Set-Location $env:PSCWorkloadRepoPath
+    Set-Location $GitRepoDirPath
 
     Write-Host "Path doesn't exist, cloning..."
-    $expression = "git clone git@github.com:$GitRepoOwner/$GitRepoName.git"
+    $expression = "git clone https://github.com/$GitRepoOwner/$GitRepoName.git"
     Try{
         Invoke-Expression -Command $expression
         Write-Host "...done."
