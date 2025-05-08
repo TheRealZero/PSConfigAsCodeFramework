@@ -23,7 +23,7 @@
     Description = 'Clones the TheRealZero\PSConfigAsCodeFramework Repo'
     TaskAction  = @{
         Execute                         = 'powershell.exe' 
-        Argument                        = "-WindowStyle Hidden -File 'C:\Git\PSConfigAsCodeFramework\ServerScripts\GitPull-TheRealZero-PSConfigAsCodeFramework.ps1'"
+        Argument                        = '-WindowStyle Hidden -File "C:\Git\PSConfigAsCodeFramework\ServerScripts\GitPull-TheRealZero-PSConfigAsCodeFramework.ps1"'
         
         #WorkingDirectory                = 'D:\'
     }

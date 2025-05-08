@@ -23,7 +23,7 @@
     Description = 'Clones the <%=$($PLASTER_PARAM_OwnerName)%>\<%=$($PLASTER_PARAM_RepoName)%> Repo'
     TaskAction  = @{
         Execute                         = '<%=$($PLASTER_PARAM_PowerShellVersion)%>' 
-        Argument                        = "-WindowStyle Hidden -File '<%=$("$PLASTER_PARAM_PSCRepoPath\ServerScripts\GitPull-$PLASTER_PARAM_OwnerName-$PLASTER_PARAM_RepoName.ps1")%>'"
+        Argument                        = '-WindowStyle Hidden -File <%=$("$PLASTER_PARAM_PSCRepoPath\ServerScripts\GitPull-$PLASTER_PARAM_OwnerName-$PLASTER_PARAM_RepoName.ps1")%>'
         
         #WorkingDirectory                = 'D:\'
     }
