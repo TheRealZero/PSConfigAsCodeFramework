@@ -19,7 +19,7 @@
 @{
     TaskAction  = @{
         Execute                         = 'powershell' 
-        Argument                        = "-WindowStyle Hidden -File C:\Git\PSConfigAsCodeFramework\ServerScripts\CreateEditOrDisableTasksFromConfigs.ps1"
+        Argument                        = '-WindowStyle Hidden -File "C:\Git\PSConfigAsCodeFramework\ServerScripts\CreateEditOrDisableTasksFromConfigs.ps1'
         #Id                              = '1'
         #WorkingDirectory                = 'D:\Manual Scripts'
     }

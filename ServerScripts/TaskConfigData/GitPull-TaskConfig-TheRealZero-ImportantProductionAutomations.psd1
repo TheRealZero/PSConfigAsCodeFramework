@@ -23,7 +23,7 @@
     Description = 'Clones the TheRealZero\ImportantProductionAutomations Repo'
     TaskAction  = @{
         Execute                         = 'powershell.exe' 
-        Argument                        = "-WindowStyle Hidden -File C:\Git\PSConfigAsCodeFramework\ServerScripts\GitPull-TheRealZero-ImportantProductionAutomations.ps1"
+        Argument                        = '-WindowStyle Hidden -File "C:\Git\PSConfigAsCodeFramework\ServerScripts\GitPull-TheRealZero-ImportantProductionAutomations.ps1"'
         
         #WorkingDirectory                = 'D:\'
     }
