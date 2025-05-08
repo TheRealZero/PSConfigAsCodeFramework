@@ -1,5 +1,5 @@
 param(
-    [string]$ManifestFilePath = $(Join-Path -Path $env:GitRepos -ChildPath 'PSConfigAsCodeFramework\PSCServerModule\PSCServerModule.psd1')
+    [string]$ManifestFilePath = $(Join-Path -Path $env:PSCWorkloadRepoPath -ChildPath 'PSConfigAsCodeFramework\PSCServerModule\PSCServerModule.psd1')
 )
 Try { Test-Path -Path $ManifestFilePath -ErrorAction Stop | Out-Null }
 Catch { Write-Error "Manifest file not found at $ManifestFilePath" -ErrorAction Stop }
@@ -39,6 +39,3 @@ New-Item -Path $(Join-Path -Path $manifestFolder -ChildPath "\BuildOutput\$modul
 Write-Verbose "Copying manifest and module script to output folder: $manifestFolder\BuildOutput\$moduleName" -Verbose
 Copy-Item -Path $manifest       -Destination $(Join-Path -Path $manifestFolder -ChildPath "\BuildOutput\$moduleName\$moduleName.psd1")
 Copy-Item -Path $moduleScript   -Destination $(Join-Path -Path $manifestFolder -ChildPath "\BuildOutput\$moduleName\$moduleName.psm1")
-
-# Write-Verbose "Publishing module to Automation repository" -Verbose
-# Publish-Module -Repository Automation -Path "$manifestFolder\BuildOutput\$moduleName" -Verbose

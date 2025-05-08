@@ -1,5 +1,5 @@
 param(
-    [string]$ManifestFilePath = $(Join-Path -Path $env:GitRepos -ChildPath 'PSConfigAsCodeFramework\PSCServerModule\PSCServerModule.psd1')
+    [string]$ManifestFilePath = $(Join-Path -Path $env:PSCWorkloadRepoPath -ChildPath 'PSConfigAsCodeFramework\PSCServerModule\PSCServerModule.psd1')
 )
 Try { Test-Path -Path $ManifestFilePath -ErrorAction Stop | Out-Null }
 Catch { Write-Error "Manifest file not found at $ManifestFilePath" -ErrorAction Stop }

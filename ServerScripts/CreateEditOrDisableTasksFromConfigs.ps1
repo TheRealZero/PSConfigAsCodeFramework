@@ -30,7 +30,7 @@ $configDataObjs      = Foreach ($configFile in $ConfigFiles) {
         Write-Verbose $_.Exception.Message -Verbose
     }
 }
-$orphanTasks         = Compare-Object -ReferenceObject $currentTasks -DifferenceObject $configDataObjs -Property TaskName, TaskPath -PassThru | Where-Object { $_.SideIndicator -eq "<=" }
+$orphanTasks         = Compare-Object -ReferenceObject $currentTasks -DifferenceObject $($configDataObjs|Foreach-Object {[pscustomobject]@{TaskName = $_.TaskName;TaskPath = $_.TaskPath}}) -Property TaskName, TaskPath -PassThru | Where-Object { $_.SideIndicator -eq "<=" }
 
 Write-Verbose "Found $($ConfigFiles.FullName|Measure-Object | Select-Object -ExpandProperty Count) config files."      -Verbose
 Write-Verbose "Found $($orphanTasks | Measure-Object | Select-Object -ExpandProperty Count) orphan tasks: " -Verbose
